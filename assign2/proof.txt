@@ -1,0 +1,28 @@
+Prove: map f (map g l) = map g (map f l)
+Know:  f(g(x)) = g(f(x)) for all numbers
+Base Case: x = [], x is an empty list
+By how map is defined, we know that:
+    map g x = [] 
+and 
+    map f x = []
+so:
+    map f (map g x) = map f ([]) = []
+and
+    map g (map f x) = map g ([]) = []
+Thus:
+    map f (map g x) = map g (map f x)
+
+Inductive hypothesis:
+    map f (map g n) = map g (map f n), where n is a list of arbitrary size
+
+Prove:
+    map f (map g m) = map g (map f m), where m is a list of size(n) + 1
+
+Proof:
+    map f (map g m) = map f (map g m:n), where m:n is the first element of m, followed by the other n elements
+    map f (map g m:n) = f(g(m)) ++ map f (map g n), by definition of map
+    f(g(m)) ++ map f (map g n) = g(f(m)) ++ map f (map g n), by the Know condition
+    g(f(m)) ++ map f (map g n) = g(f(m)) ++ map g (map f n), by Inductive hypothesis
+    g(f(m)) ++ map g (map f n) = map g (map f m:n), by definition of concatenation, and map
+Thus:
+    map f (map g m) = map f (map g m)
